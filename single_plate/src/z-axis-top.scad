@@ -48,7 +48,7 @@ module z_top(){
   z_top_fancy();
   z_top_holes();
  }
- translate([0,-13,0]) mirror([0,1,0]) difference(){
+ *translate([0,-13,0]) mirror([0,1,0]) difference(){
   z_top_base();
   z_top_fancy();
   z_top_holes();

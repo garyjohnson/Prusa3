@@ -7,10 +7,11 @@
 
 include <../../configuration.scad>
 use <bearing.scad>
+use <nuts_and_bolts.scad>
 
 module x_end_base(){
 // Main block
-translate(v=[-14,-10,30]) cube(size = [17,39,60], center = true);
+translate(v=[-14,-10-2,30]) cube(size = [17,39+4,60], center = true);
 // Bearing holder
 vertical_bearing_base();	
 //Nut trap
@@ -23,14 +24,15 @@ vertical_bearing_base();
 module x_end_holes(){
 vertical_bearing_holes();
 // Belt hole
-translate(v=[-5.5-10+1.5,-10,30]) cube(size = [10,46,32], center = true);
+translate(v=[-5.5-10+1.5,-10,30]) cube(size = [10,50,32], center = true);
 // Bottom pushfit rod
 translate(v=[-14,-40,6]) rotate(a=[-90,0,0]) pushfit_rod(8,50);
 // Top pushfit rod
 translate(v=[-14,-40,x_rod_distance+6]) rotate(a=[-90,0,0]) pushfit_rod(8,50);
 // Nut trap
  translate(v=[0,-17,-1]) cylinder(h = 10, r=2.45);
- translate(v=[0,-17,3]) rotate([0,0,30]) cylinder(h = 5, r=4.5, $fn = 6);
+ *translate(v=[0,-17,3]) rotate([0,0,30]) cylinder(h = 5, r=9.2/2, $fn = 6);
+ translate(v=[0,-17,4]) rotate([0,0,30]) nutHole(5);
 }
 
 
@@ -42,7 +44,7 @@ module x_end_plain(){
  }
 }
 
-//x_end_plain();
+x_end_plain();
 
 
 module pushfit_rod(diameter,length){

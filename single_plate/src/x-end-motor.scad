@@ -17,7 +17,7 @@ module x_end_motor_holes(){
  // Position to place
  translate(v=[-0,32,30.25]){
   // Belt hole
-  translate(v=[-14,1,0]) cube(size = [10,46,22], center = true);
+  translate(v=[-14,-20,0]) cube(size = [10,100,32], center = true);
   // Motor mounting holes
   translate(v=[-10,-15.5,-15.5]) cube(size = [60,3.5,3.5], center = true);
   translate(v=[-10,-15.5,15.5]) cube(size = [60,3.5,3.5], center = true);

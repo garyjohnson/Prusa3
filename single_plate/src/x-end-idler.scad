@@ -13,7 +13,7 @@ module x_end_idler_base(){
 
 module x_end_idler_holes(){
  x_end_holes();
- translate(v=[0,-25,30.25]) rotate(a=[0,-90,0]) cylinder(h = 80, r=2.2, $fn=30);
+ translate(v=[0,-25-2,30.25]) rotate(a=[0,-90,0]) cylinder(h = 80, r=4.2, $fn=30);
 }
 
 // Final part

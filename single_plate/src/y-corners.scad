@@ -13,14 +13,14 @@ module corner_base(){
 module corner_holes(){
  translate([-11,-11,0]){
   // Bottom hole
-  translate([0,11,10]) rotate([0,90,0]) translate([0,0,-5]) cylinder(h = 270, r=4.4, $fn=30);
+  translate([0,11,10-1]) rotate([0,90,0]) translate([0,0,-5]) cylinder(h = 270, r=5.4, $fn=30);
   // Top hole
-  translate([0,11,30]) rotate([0,90,0]) translate([0,0,-5]) cylinder(h = 270, r=4.4, $fn=30);
+  translate([0,11,30+1]) rotate([0,90,0]) translate([0,0,-5]) cylinder(h = 270, r=5.4, $fn=30);
   // Middle hole
   translate([11,0,20]) rotate([0,0,90]) rotate([0,90,0]) translate([0,0,-5]) cylinder(h = 270, r=5.4, $fn=30);
 
   // Washer hole
-  translate([11,-3,20]) rotate([0,0,90]) rotate([0,90,0]) translate([0,0,-5]) cylinder(h = 10, r=11, $fn=30);
+  translate([11,-3+7,20]) rotate([0,0,90]) rotate([0,90,0]) translate([0,0,-5]) cylinder(h = 3, r1=18, r2=11, $fn=30);
 
   // Top smooth rod insert
   // Smooth rod place
@@ -46,7 +46,7 @@ module corner_fancy(){
 // Final part
 module corner(){
  // Rotate the part for better printing
- translate([0,0,11]) rotate([-90,0,0]) difference(){
+ translate([0,0,0]) rotate([0,0,0]) difference(){
   corner_base();
   corner_holes();
   corner_fancy();
