@@ -5,17 +5,29 @@
 // http://www.reprap.org/wiki/Prusa_Mendel
 // http://prusamendel.org
 
-wall= 1.2;
-clearence= 0.1; 
+include <../configuration.scad>;
+include <inc/nuts_and_bolts.scad>;
+
+wall = layer_width * 3;
+clearence = 0.3;
+
+bearings = [
+ [ 8, 22, 7 ], // 608 bearing
+ [ 4, 13, 5 ], // 624 bearing
+];
+
+function inner_diameter() = bearings[bearing_y_idler][0];
+function outer_diameter() = bearings[bearing_y_idler][1];
+function thickness() = bearings[bearing_y_idler][2];
 
 module belt_guide_base(){
- cylinder(r=6.5+wall+clearence, h=5-0.5, $fn=50);
- cylinder(r=6.5+wall+clearence+2*wall, h=0.95, $fn=50);
+ cylinder(r=(outer_diameter()/2)+wall+clearence, h=(thickness()/2) + wall + 0.5, $fn=50);
+ cylinder(r=(outer_diameter()/2)+wall+clearence+wall, h=wall, $fn=50);
 }
 
 module belt_guide_holes(){
- translate([0,0,2]) cylinder(r=5.1+clearence, h=10, $fn=50);
- translate([0,0,-1]) cylinder(r=5+wall+clearence-2*wall, h=10, $fn=50);
+ translate([0,0,wall]) cylinder(r=(outer_diameter()/2)+clearence, h=10, $fn=50);
+ translate([0,0,-1]) cylinder(r=(inner_diameter()/2)+clearence, h=10, $fn=50);
 }
 
 // Final part
