@@ -23,7 +23,7 @@ else {
 translate([-2.5+25,27-3+2,0]) %rotate([180,0,90]) motor();
 if(dual_extruder) mirror([1,0,0]) translate([-2.5+25,27-3+2,0]) %rotate([180,0,90]) motor();
 
-5extruder(vertical_carriage=with_vertical_carriage_holes, mounting_holes=with_mountplate_holes, hotend=with_hotend_mount);
+extruder(vertical_carriage=with_vertical_carriage_holes, mounting_holes=with_mountplate_holes, hotend=with_hotend_mount);
 
 translate([19+25+2, -9, 8+3]) rotate([0,180,0]) idler();
 if(dual_extruder) mirror([1,0,0]) translate([19+25+2, -9, 8+3]) rotate([0,180,0]) idler();
