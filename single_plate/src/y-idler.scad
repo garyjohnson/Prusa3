@@ -14,7 +14,7 @@ module y_idler_base(){
 }
 
 module y_idler_holes(){
- translate(v = [0,0,-1]) cylinder(h = 120, r=8.4/2);
+ translate(v = [0,0,-1]) cylinder(h = 120, r=9/2);
  translate(v = [0,20,-1]) cylinder(h = 25, r=5.4);
  difference() {
    translate(v = [0,0,4]) cylinder(h = 11, r=22/2+3);
