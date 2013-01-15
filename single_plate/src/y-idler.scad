@@ -14,9 +14,18 @@ module y_idler_base(){
 }
 
 module y_idler_holes(){
- translate(v = [0,0,-1]) cylinder(h = 120, r=8.4/2);	
+ translate(v = [0,0,-1]) cylinder(h = 120, r=8.4/2);
  translate(v = [0,20,-1]) cylinder(h = 25, r=5.4);
- translate(v = [0,0,4]) cylinder(h = 11, r=22/2+3);
+ difference() {
+   translate(v = [0,0,4]) cylinder(h = 11, r=22/2+3);
+
+   // The fake bearing
+   %translate([0,0,1+4+0.5]) cylinder(h = 8, r=(22/2)+2*0.66);
+
+   // The two bumps around the center of the bearing
+   translate([0,0,4]) cylinder(r1=15/2, r2=12/2,h=1.5);
+   translate([0,0,9+6]) rotate([0,180,0]) cylinder(r1=15/2, r2=12/2,h=1.5);
+}
 }
 
 // Final part
