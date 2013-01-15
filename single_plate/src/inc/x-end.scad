@@ -24,15 +24,15 @@ vertical_bearing_base();
 module x_end_holes(){
 vertical_bearing_holes();
 // Belt hole
-translate(v=[-5.5-10+1.5,-10,30]) cube(size = [10,50,32], center = true);
+translate(v=[-5.5-10+1.5,-10-4/2,30]) cube(size = [10,47-4,32], center = true);
 // Bottom pushfit rod
-translate(v=[-14,-40,6]) rotate(a=[-90,0,0]) pushfit_rod(8,50);
+translate(v=[-14,-40,6]) rotate(a=[-90,0,0]) pushfit_rod(9,50);
 // Top pushfit rod
-translate(v=[-14,-40,x_rod_distance+6]) rotate(a=[-90,0,0]) pushfit_rod(8,50);
+translate(v=[-14,-40,x_rod_distance+6]) rotate(a=[-90,0,0]) pushfit_rod(9,50);
 // Nut trap
- translate(v=[0,-17,-1]) cylinder(h = 10, r=2.45);
+ translate(v=[0,-17,-1]) cylinder(h = 10, r=5.6/2);
  *translate(v=[0,-17,3]) rotate([0,0,30]) cylinder(h = 5, r=9.2/2, $fn = 6);
- translate(v=[0,-17,4]) rotate([0,0,30]) nutHole(5);
+ translate(v=[0,-17,4]) rotate([0,0,30]) nutHole(5.2);
 }
 
 
@@ -50,6 +50,6 @@ x_end_plain();
 module pushfit_rod(diameter,length){
  cylinder(h = length, r=diameter/2, $fn=30);
  translate(v=[0,-diameter/4,length/2]) cube(size = [diameter,diameter/2,length], center = true);
- translate(v=[0,-diameter/2-2,length/2]) cube(size = [diameter,1,length], center = true);
+ translate(v=[0,-diameter/2-1.3,length/2]) cube(size = [diameter,1,length], center = true);
 }
 
