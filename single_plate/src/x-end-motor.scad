@@ -20,7 +20,7 @@ module x_end_motor_holes(){
  translate(v=[-0,32,30.25]){
   translate([-4,-0.5,2]) cube([20,44,44], center=true);
   
-  #hull() {
+  hull() {
     translate([-9, 14, -25]) cube([10,14,12], center=true);
     translate([0, -15, -25]) cube([10,14,12], center=true);
   }
