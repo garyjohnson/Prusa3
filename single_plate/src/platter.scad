@@ -25,7 +25,7 @@ translate([23,11+23,0]) rotate([0,0,0]) corner();
 
 translate([-17, 25, 0]) rotate([0,0,-90]) y_idler();
 
-translate([2,60,0]) rotate([0,0,90]) y_motor();
+translate([-45.5,79,0]) rotate([0,0,-90-45]) y_motor(reversed=true);
 
 translate([-51, 22, 0]) rotate([0,0,90]) z_top();
 translate([97, 18, 0]) rotate([0,0,180]) mirror([0,1,0]) z_top();
