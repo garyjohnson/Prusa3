@@ -36,7 +36,8 @@ module y_motor_holes(){
 }
 
 // Final part
-module y_motor(){
+module y_motor(reversed=false){
+ mirror([reversed ? 1 : 0, 0, 0])
  difference(){
   y_motor_base();
   y_motor_holes();
