@@ -7,6 +7,13 @@
 
 //include <configuration.scad>
 
+module quarter_round(r,h) {
+  difference() {
+    cube(size = [r,r,h]);
+    translate([r,r,-1]) cylinder(r=r,h=h+2);
+  }
+}
+
 module y_motor_base(){
  // Motor holding part
  translate(v = [29,-21+50,0]){
@@ -15,11 +22,12 @@ module y_motor_base(){
   translate(v = [-15.5,+15.5,0]) cylinder(h = 10, r=5.5);
   // Joins motor holder and rod plate
   translate(v = [-29,-21,0]) cube(size = [14,30,10]);
+  translate(v = [-29+3+5,-21+30,0]) rotate([0,0,90]) quarter_round(r=5/2,h=10);
  }
  // Front holding part
- translate(v = [0,10,0]) cylinder(h = 10, r=9);
- translate(v = [0,20,5])cube(size = [16,20,10], center=true);	
- translate(v = [0,30,0])cylinder(h = 10, r=9);
+ translate(v = [-2,10,0]) cylinder(h = 10, r=9);
+ translate(v = [-2,20,5])cube(size = [16,20,10], center=true);	
+ translate(v = [-2,30,0])cylinder(h = 10, r=9);
 }
 
 module y_motor_holes(){
@@ -31,8 +39,8 @@ module y_motor_holes(){
   translate(v = [-15.5,-15.5,5]) cylinder(h = 7, r=3.5);
   translate(v = [-15.5,+15.5,5]) cylinder(h = 7, r=3.5);
  }
- translate(v = [0,10,-1]) cylinder(h = 12, r=5.4);	
- translate(v = [0,30,-1])cylinder(h = 12, r=5.4);
+ translate(v = [-2,10,-1]) cylinder(h = 12, r=5.4);	
+ translate(v = [-2,30,-1])cylinder(h = 12, r=5.4);
 }
 
 // Final part
