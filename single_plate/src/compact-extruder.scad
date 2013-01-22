@@ -116,16 +116,16 @@ module extruder_body_holes() {
   // Upper motor mount hole
   translate([-8.5,-18,-1]) cylinder(r=2, h=22);
   // Lower motor mount hole screw head
-  translate([-8.5,18,3]) cylinder(r=3.5, h=22);
+  translate([-8.5,18,3]) nut(5.8,10);
   // Upper motor mount hole screw head
-  translate([-8.5,-18,3]) cylinder(r=3.5, h=22);
+  translate([-8.5,-18,3]) nut(5.8,10);
   // Idler bearing cutout
   translate([11+3,0,-4.5+10]) cylinder(r=12, h=24);
 
   // remove some plastic on the upper part.
   translate([11-2+2,13.5+1-1,0]) {
 	cube([5,7,12+1]);
-     translate([5,3.5,0]) cylinder(r=3.5, h=12+1);
+     #translate([5,3.5,0]) cylinder(r=3.5, h=12+1);
   }
   translate([11+5-2+2,17+1-1,0]) bolt(25, 3.5);
  }
@@ -136,6 +136,24 @@ module extruder_body_holes() {
      translate([-20,-30,25]) rotate([0,90,0]) cylinder(r=10/2,h=35);
    }
  }
+ translate([11+2,25+4-10,-5]) {
+   hull() {
+     translate([-15,15,25]) rotate([0,90,0]) cylinder(r=10/2,h=35);
+     translate([-20,-30,25]) rotate([0,90,0]) cylinder(r=10/2,h=35);
+   }
+ }
+
+ // remove material
+ hull() {
+   translate([4,0,6]) cylinder(r=10/2, h=20);
+   translate([4,31,6]) cylinder(r=10/2, h=20);
+ }
+ //translate([4,23,6]) cylinder(r=18/2, h=20);
+ hull() for(x=[-1,10]) {
+   translate([x,28,6]) cylinder(r=10/2, h=20);
+   translate([x,44,6]) cylinder(r=10/2, h=20);
+ }
+ translate([5.5,-5,6]) cube([10,10,20]);
 
  // Filament path
  translate([1.5+11+3.5+2+2,65+4,11]) rotate([90,0,0]) cylinder(r=5.2/2, h=70);
@@ -208,7 +226,7 @@ module extruder_full_holes(vertical_carriage=false, mounting_holes=true){
 
 module tiltscrew() {
     for(r=[0:5:-30]) rotate([0,0,r])
-      translate([-2,-15,-(2.4/2)-0.5]) cube([3.4,20,7.4+1]);
+      translate([-2,-15,-(2.4/2)-0.5]) cube([3.4,20,7.4+2]);
     for(r=[0:5:-30]) rotate([0,0,r])
       translate([-5,0,3]) rotate([0,90,0]) cylinder(r=5/2,h=30);
 }
