@@ -7,8 +7,10 @@
 
 include <../configuration.scad>
 
+belt_elevation = -3;
+
 module belt_holder_base(){
- translate([-33-8.5,0,-1]) cube([33,15,16]); 
+ translate([-33-8.5,-belt_elevation,-1]) cube([33,15,16]); 
  translate([-33-8.5,11,-1]) cube([33,15,16]);
  translate([-50,22,-1]) cube([50,4,16]);	
 }
@@ -16,15 +18,15 @@ module belt_holder_base(){
 module belt_holder_beltcut(){
  position_tweak=-0.2;
  // Belt slit
- translate([-66,-0.5+10,belt_tooth_distance]) cube([67,1,15]);
+ translate([-66,-0.5+10-belt_elevation,belt_tooth_distance]) cube([67,1,15]);
  // Smooth insert cutout
- translate([-66,-0.5+10,12]) rotate([45,0,0]) cube([67,15,15]);
+ translate([-66,-0.5+10-belt_elevation,12]) rotate([45,0,0]) cube([67,15,15]);
  // Individual teeth
- for ( i = [0 : 23] ){
-  translate([0-i*belt_tooth_distance+position_tweak,-0.5+8,3]) cube([belt_tooth_distance*belt_tooth_ratio+0.2,3,15]);
+ *for ( i = [0 : 23] ){
+  translate([0-i*belt_tooth_distance+position_tweak,-0.5+8-belt_elevation,3]) cube([belt_tooth_distance*belt_tooth_ratio+0.2,3,15]);
  }
  // Middle opening
- translate([-2-25,-1,3]) cube([4,11,15]);	
+ translate([-2-25,-1-belt_elevation,3]) cube([4,11,15]);	
 }
 
 module belt_holder_holes(){
