@@ -13,9 +13,9 @@ use <z-axis-top.scad>
 
 
 module platter() {
-translate([86, 42, 0]) x_carriage();
-translate([6, 74, 0]) rotate([0,0,-90]) x_end_idler();
-translate([-60, 74, 0]) rotate([0,0,-90]) x_end_motor();
+translate([88, 42, 0]) x_carriage();
+translate([8, 74, 0]) rotate([0,0,-90]) x_end_idler();
+translate([-60-7, 74, 0]) rotate([0,0,-90]) x_end_motor();
 translate([-70, 73, 0]) rotate([0,0,90]) belt_holder();
 
 translate([-86,11,0]) rotate([0,0,90]) corner();
@@ -25,7 +25,7 @@ translate([23,11+23,0]) rotate([0,0,0]) corner();
 
 translate([-17, 25, 0]) rotate([0,0,-90]) y_idler();
 
-translate([-45.5,79,0]) rotate([0,0,-90-45]) y_motor(reversed=true);
+translate([-4,55,0]) rotate([0,0,-90-35+180]) y_motor(reversed=true);
 
 translate([-51, 22, 0]) rotate([0,0,90]) z_top();
 translate([97, 18, 0]) rotate([0,0,180]) mirror([0,1,0]) z_top();
