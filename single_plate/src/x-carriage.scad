@@ -29,7 +29,7 @@ module x_carriage_beltcut(){
  // Smooth entrance
  translate([-66,21.5+10,14]) rotate([45,0,0]) cube([67,15,15]);
  // Teeth cuts
- for ( i = [0 : 23] ){
+ *for ( i = [0 : 23] ){
   translate([0-i*belt_tooth_distance,21.5+8,6]) cube([belt_tooth_distance*belt_tooth_ratio+0.2,3,15]);
  }
 }
