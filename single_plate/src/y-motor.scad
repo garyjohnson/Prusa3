@@ -52,4 +52,4 @@ module y_motor(reversed=false){
  }
 }
 
-y_motor();
+y_motor(reversed=true);
