@@ -18,7 +18,7 @@ module x_end_motor_base(){
 
 }
 
-module roundedcube(v, r) {
+module roundedcube(v, r=0) {
  translate([0,r,r]) minkowski()
  {
   cube([v[0]/2,v[1]-r*2,v[2]-r*2]);
