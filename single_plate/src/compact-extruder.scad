@@ -217,8 +217,8 @@ module extruder_PG35L_body() {
  translate([-2+2,0,0]) cube([24+6,58-9,24]);
 
  // support bearings for hotend
- %translate([6,37.5,7]) rotate([0,-90,0]) bearing();
- %translate([6,14.5,7]) rotate([0,-90,0]) bearing();
+ //%translate([6,37.5,7]) rotate([0,-90,0]) bearing();
+ //%translate([6,14.5,7]) rotate([0,-90,0]) bearing();
 
  translate([11-2+2+2+6, 22+1+4-1, 0]) {
   translate([11-1,13.5,12+1.5]) {
