@@ -5,13 +5,13 @@
 // http://www.reprap.org/wiki/Prusa_Mendel
 // http://prusamendel.org
 
-dual_extruder = true;
+dual_extruder = true; // produce a mirrored extruder with hex nuts on the mirror part.
 
-with_vertical_carriage_holes = true;
-with_mountplate_holes = false;
+with_vertical_carriage_holes = true; // don't set to false
+with_mountplate_holes = false; // set to true for Prusa i2-style x-carriage compatibility
 
 // supported hotends: jhead
-// comment the line to disable
+// comment the line to disable the hotend mount completely
 with_hotend_mount = "jhead";
 
 // supported motors: PG35L, 42BYG48HJ50
@@ -21,15 +21,11 @@ if(dual_extruder && with_mountplate_holes) {
 	echo("can't use dual extruder with mountplate!");
 }
 else {
-extruder(vertical_carriage=with_vertical_carriage_holes, mounting_holes=with_mountplate_holes, hotend=with_hotend_mount);
+  for(i=dual_extruder ? [0,1] : [0]) mirror([i,0,0]) translate([10,0,0])
+    extruder(vertical_carriage=with_vertical_carriage_holes, mounting_holes=with_mountplate_holes, hotend=with_hotend_mount, dual=(i==1));
 
-if(with_motor == "PG35L") {
-	for(i=dual_extruder ? [0,1] : [0]) mirror([i,0,0])
-		translate([19+25+2+6, -9, 8+3]) rotate([0,180,0]) idler();
-} else if(with_motor == "42BYG48HJ50") {
-	for(i=dual_extruder ? [0,1] : [0]) mirror([i,0,0])
-		translate([19+25+2, -9, 8+3]) rotate([0,180,0]) idler();
-}
+  for(i=dual_extruder ? [0,1] : [0]) mirror([i,0,0])
+    translate([19+39, -9, 11]) rotate([0,180,90]) idler();
 }
 
 ///-
@@ -125,7 +121,10 @@ module jhead_mount() {
      }
 	 translate([1.5+11+3.5,54,11]) rotate([-90,0,0]) cylinder(r=groove_d/2+0.5, h=top_h+groove_h+1);
 	 translate([1.5+11+3.5,54,11]) rotate([-90,0,0]) cylinder(r=top_d/2+0.5, h=top_h);
-      hull() {
+      translate([1.5+11+3.5,54+top_h+groove_h,11]) rotate([-90,0,0]) cylinder(r=top_d/2+0.5, h=top_h);
+
+      // remove material for the groove
+	 hull() {
 	    translate([1.5+11+3.5,54,11+(groove_d/2)+1]) rotate([-90,0,0]) cylinder(r=(groove_d+4)/2, h=top_h+groove_h+10);
 	    translate([1.5+11+3.5,54,11+15]) rotate([-90,0,0]) cylinder(r=(groove_d+4)/2, h=top_h+groove_h+1);
       }
@@ -217,7 +216,9 @@ module extruder_PG35L_body() {
  // Main body
  translate([-2+2,0,0]) cube([24+6,58-9,24]);
 
- *%translate([8,40,7]) rotate([0,-90,0]) bearing();
+ // support bearings for hotend
+ %translate([6,37.5,7]) rotate([0,-90,0]) bearing();
+ %translate([6,14.5,7]) rotate([0,-90,0]) bearing();
 
  translate([11-2+2+2+6, 22+1+4-1, 0]) {
   translate([11-1,13.5,12+1.5]) {
@@ -231,7 +232,7 @@ module extruder_PG35L_body() {
  }
 }
 
-module extruder_PG35L_holes() {
+module extruder_PG35L_holes(dual=false) {
  translate([11+2,25-3+4,0]) {
   // Main shaft opening
   translate([5.5,0,-1]) cylinder(r=7.5, h=26);
@@ -273,8 +274,8 @@ module extruder_PG35L_holes() {
  // remove material
  difference() {
  hull() for(x=[0,9]) {
-   translate([x,0,0]) cylinder(r=10/2, h=20);
-   translate([x,38+((!dual_extruder && with_motor == "PG35L") ? 6 : 0),0]) cylinder(r=10/2, h=20);
+   translate([x,0,0]) cylinder(r=10/2, h=25);
+   translate([x,38+6,0]) cylinder(r=10/2, h=25);
  }
   translate([5.5,0,-1]+[11+2,25-3+4,0]) cylinder(r=11, h=26);
  }
@@ -292,7 +293,7 @@ module extruder_PG35L_holes() {
   translate([12+2+6,5+4,3+1]) tiltscrew();
 }
 
-module extruder_mount(vertical_carriage=false, mounting_holes=true) {
+module extruder_mount(vertical_carriage=false, mounting_holes=true, dual=false) {
  // Extruder plate mount
  if(mounting_holes) {
      translate([-16+2,49+4,0]) cube([65,5,24]);
@@ -307,23 +308,30 @@ module extruder_mount(vertical_carriage=false, mounting_holes=true) {
 
 module carriage_mount_cylinders() {
  if(with_motor == "PG35L") {
-  translate([11+2+(dual_extruder ? 0 : 5),25+4,0])
-    hull() for(t=dual_extruder?[16+5,-42-5]:[16,-8])
+  translate([11+2+5,25+4,0])
+    hull() for(t=[16,-8])
       translate([t,24,0]) cylinder(r=5, h=24);
  } else {
   translate([11+2,25+4,0])
-    hull() for(t=dual_extruder?[16,-42]:[16,-8])
+    hull() for(t=[16,-8])
       translate([t,24,0]) cylinder(r=5, h=24);
  }
 }
 
-module extruder_mount_holes(vertical_carriage=false, mounting_holes=true) {
- translate([dual_extruder?0:11+4+2+(with_motor == "PG35L" ? 5 : 0),25+4,0]){
+module extruder_mount_holes(vertical_carriage=false, mounting_holes=true, dual=false) {
+ translate([11+4+2+(with_motor == "PG35L" ? 5 : 0),25+4,0]){
  if(vertical_carriage) {
-  // Carriage mount right screw head hole
-  translate([-12,24,-3]) cylinder(r=3.5, h=23);
-  // Carriage mount left screw head hole
-  translate([12,24,-3]) cylinder(r=3.5, h=23);
+  if(dual) {
+    // Carriage mount right screw head hole
+    translate([-12,24,-3]) nut(6.5, h=23);
+    // Carriage mount left screw head hole
+    translate([12,24,-3]) nut(6.5, h=23);
+  } else {
+    // Carriage mount right screw head hole
+    translate([-12,24,-3]) cylinder(r=3.5, h=23);
+    // Carriage mount left screw head hole
+    translate([12,24,-3]) cylinder(r=3.5, h=23);
+  }
   // Carriage mount right screw hole
   translate([-12,24,20.5]) cylinder(r=2, h=23);
   // Carriage mount left screw head hole
@@ -338,38 +346,31 @@ module extruder_mount_holes(vertical_carriage=false, mounting_holes=true) {
   }
 }
 
-module extruder_hotend(hotend=undef) {
+module extruder_hotend(hotend=undef, dual=false) {
  if(hotend == "jhead") {
    translate([2+2+(with_motor == "PG35L" ? 5 : 0),4,0]) jhead_mount();
  }
 }
 
-module extruder_full(vertical_carriage=false, mounting_holes=true, hotend=undef) {
+module extruder_full(vertical_carriage=false, mounting_holes=true, hotend=undef, dual=false) {
   if(with_motor == "PG35L") {
-     extruder_PG35L_body();
+     extruder_PG35L_body(dual=dual);
      translate([-2.5+25-4,27-3+2,0]) %rotate([180,0,90]) motor();
-     if(dual_extruder) mirror([1,0,0]) extruder_PG35L_body();
-     if(dual_extruder) mirror([1,0,0]) translate([-2.5+25-4,27-3+2,0]) %rotate([180,0,90]) motor();
   } else if(with_motor == "42BYG48HJ50") {
-	extruder_42BYG48HJ50_body();
+	extruder_42BYG48HJ50_body(dual=dual);
   	translate([-2.5+25,27-3+2,0]) %rotate([180,0,90]) motor();
-     if(dual_extruder) mirror([1,0,0]) extruder_42BYG48HJ50_body();
-  	if(dual_extruder) mirror([1,0,0]) translate([-2.5+25,27-3+2,0]) %rotate([180,0,90]) motor();
   }
-  extruder_mount(vertical_carriage, mounting_holes);
-  extruder_hotend(hotend);
-  if(dual_extruder) mirror([1,0,0]) extruder_hotend(hotend);
+  extruder_mount(vertical_carriage, mounting_holes, dual=dual);
+  extruder_hotend(hotend, dual=dual);
 }
 
-module extruder_full_holes(vertical_carriage=false, mounting_holes=true){
+module extruder_full_holes(vertical_carriage=false, mounting_holes=true, dual=false){
   if(with_motor == "PG35L") {
-	extruder_PG35L_holes();
-    if(dual_extruder) mirror([1,0,0]) extruder_PG35L_holes();
+	extruder_PG35L_holes(dual=dual);
   } else if(with_motor == "42BYG48HJ50") {
-	extruder_42BYG48HJ50_holes();
-    if(dual_extruder) mirror([1,0,0]) extruder_42BYG48HJ50_holes();
+	extruder_42BYG48HJ50_holes(dual=dual);
   }
-  extruder_mount_holes(vertical_carriage, mounting_holes);
+  extruder_mount_holes(vertical_carriage, mounting_holes, dual=dual);
 }
 
 module tiltscrew() {
@@ -438,9 +439,9 @@ module idler(bearing_indent=-1){
 }
 
 // Extruder final part
-module extruder(vertical_carriage=true, mounting_holes=false, hotend=undef){
- translate([0,0,0]) difference(){
-  extruder_full(vertical_carriage=vertical_carriage, mounting_holes=mounting_holes, hotend=hotend);
-  extruder_full_holes(vertical_carriage=vertical_carriage, mounting_holes=mounting_holes, hotend=hotend);
+module extruder(vertical_carriage=true, mounting_holes=false, hotend=undef, dual=false){
+ difference(){
+  extruder_full(vertical_carriage=vertical_carriage, mounting_holes=mounting_holes, hotend=hotend, dual=dual);
+  extruder_full_holes(vertical_carriage=vertical_carriage, mounting_holes=mounting_holes, hotend=hotend, dual=dual);
  }
 }
