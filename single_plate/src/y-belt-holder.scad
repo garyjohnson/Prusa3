@@ -7,7 +7,7 @@
 
 include <../configuration.scad>
 
-belt_elevation = -3;
+belt_elevation = 3;
 
 module belt_holder_base(){
  translate([-33-8.5,-belt_elevation,-1]) cube([33,15,16]); 
@@ -18,7 +18,7 @@ module belt_holder_base(){
 module belt_holder_beltcut(){
  position_tweak=-0.2;
  // Belt slit
- translate([-66,-0.5+10-belt_elevation,belt_tooth_distance]) cube([67,1,15]);
+ translate([-66,-0.5+10-belt_elevation,belt_tooth_distance]) cube([67,1.4,15]);
  // Smooth insert cutout
  translate([-66,-0.5+10-belt_elevation,12]) rotate([45,0,0]) cube([67,15,15]);
  // Individual teeth
