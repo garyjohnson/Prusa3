@@ -1,6 +1,6 @@
 
 
-fan_grill(40);
+fan_grill(45);
 
 module fan_grill(size=40) {
 // Body Parameters
@@ -44,10 +44,10 @@ module fan_grill()
 			translate([size/2,size/2,0]) cylinder(r=holeradius,h=thickness);
 
 			// screws
-			translate([screwinset,screwinset,0]) cylinder(r=screwradius,h=thickness);
-			translate([screwinset,size-screwinset,0]) cylinder(r=screwradius,h=thickness);
-			translate([size-screwinset,screwinset,0]) cylinder(r=screwradius,h=thickness);
-			translate([size-screwinset,size-screwinset,0]) cylinder(r=screwradius,h=thickness);
+			#translate([screwinset,screwinset,0]) cylinder(r=screwradius,h=thickness+1);
+			translate([screwinset,size-screwinset,0]) cylinder(r=screwradius,h=thickness+1);
+			translate([size-screwinset,screwinset,0]) cylinder(r=screwradius,h=thickness+1);
+			translate([size-screwinset,size-screwinset,0]) cylinder(r=screwradius,h=thickness+1);
 		}
 		translate([size/2,size/2,0])
 		interrior();
@@ -64,6 +64,11 @@ module body()
 		translate([cornerradius,size-cornerradius,0]) cylinder(r=cornerradius,h=thickness);
 		translate([size-cornerradius,cornerradius,0]) cylinder(r=cornerradius,h=thickness);
 		translate([size-cornerradius,size-cornerradius,0]) cylinder(r=cornerradius,h=thickness);
+
+		#translate([screwinset,screwinset,0]) cylinder(r=screwradius+2,h=thickness+1);
+		translate([screwinset,size-screwinset,0]) cylinder(r=screwradius+2,h=thickness+1);
+		translate([size-screwinset,screwinset,0]) cylinder(r=screwradius+2,h=thickness+1);
+		translate([size-screwinset,size-screwinset,0]) cylinder(r=screwradius+2,h=thickness+1);
 	}
 }
 
