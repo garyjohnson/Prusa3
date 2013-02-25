@@ -26,9 +26,9 @@ vertical_bearing_holes();
 // Belt hole
 translate(v=[-5.5-10+1.5,-10-4/2,30]) cube(size = [10,47-4,32], center = true);
 // Bottom pushfit rod
-translate(v=[-14,-40,6]) rotate(a=[-90,0,0]) pushfit_rod(9,50);
+translate(v=[-14,-40,6]) rotate(a=[-90,0,0]) pushfit_rod(8.3,50);
 // Top pushfit rod
-translate(v=[-14,-40,x_rod_distance+6]) rotate(a=[-90,0,0]) pushfit_rod(9,50);
+translate(v=[-14,-40,x_rod_distance+6]) rotate(a=[-90,0,0]) pushfit_rod(8.3,50);
 // Nut trap
  translate(v=[0,-17,-1]) cylinder(h = 10, r=5.6/2);
  *translate(v=[0,-17,3]) rotate([0,0,30]) cylinder(h = 5, r=9.2/2, $fn = 6);

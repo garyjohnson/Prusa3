@@ -25,7 +25,7 @@ module x_carriage_beltcut(){
  // Cut clearing space for the belt
  translate([-38,5,7]) cube([40,13,15]);
  // Belt slit
- translate([-66,21.5+10,6]) cube([67,1,15]);
+ translate([-66,21.5+10-0.4,6]) cube([67,1.4,15]);
  // Smooth entrance
  translate([-66,21.5+10,14]) rotate([45,0,0]) cube([67,15,15]);
  // Teeth cuts
@@ -41,9 +41,9 @@ module x_carriage_holes(){
  translate([-33/2,45,0]) rotate([0,0,90]) horizontal_bearing_holes(2);
   // Extruder mounting holes
   translate([-16.5+12,24,-1])cylinder(r=1.7, h=20, $fn=8);
-  translate([-16.5+12,24,10])cylinder(r=3.1, h=20, $fn=6); 
+  translate([-16.5+12,24,10])cylinder(r=3.5, h=20, $fn=6); 
   translate([-16.5-12,24,-1])cylinder(r=1.7, h=20, $fn=8);
-  translate([-16.5-12,24,10])cylinder(r=3.1, h=20, $fn=6); 	
+  translate([-16.5-12,24,10])cylinder(r=3.5, h=20, $fn=6); 	
 }
 
 module x_carriage_fancy(){

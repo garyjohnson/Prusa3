@@ -38,7 +38,7 @@ module x_end_idler_holes(){
 
  translate([-10,-21,15]) roundedcube([10,11,30], 4);
  translate([-25,-21,15]) roundedcube([10,27,30], 4);
- #translate(v=[-5.5,-25-2,30.25]) rotate(a=[0,-90,0]) cylinder(h = 17, r=4.2, $fn=30);
+ translate(v=[-5.5,-25-2,30.25]) rotate(a=[0,-90,0]) cylinder(h = 17, r=4.2, $fn=30);
 }
 
 // Final part
