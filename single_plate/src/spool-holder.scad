@@ -8,7 +8,7 @@ plate_thickness = 6.2;
 beam_thickness = 4;
 beam_height = 90;
 beam_width = clip_thickness*2+plate_thickness;
-bar_diameter = 10;
+bar_diameter = 8;
 bar_outer_diameter = bar_diameter+6;
 cross_thickness = 3;
 
