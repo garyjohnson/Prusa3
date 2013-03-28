@@ -19,6 +19,9 @@ with_hotend_mount = "jhead";
 // supported motors: PG35L
 with_motor = "PG35L";
 
+// increasing this value will elevate the motor so it can clear the x-ends.
+motor_elevation = 5;
+
 if(dual_extruder && with_mountplate_holes) {
 	echo("can't use dual extruder with mountplate!");
 }
@@ -106,7 +109,7 @@ module jhead_mount(second_extruder=false) {
 
 module extruder_body(second_extruder=false) {
  // Main body
- translate([-2+2,0,0]) cube([24+6,58-9,24]);
+ translate([-2+2,0,0]) cube([24+6,58-9+motor_elevation,24]);
 
  *%translate([8,40,7]) rotate([0,-90,0]) bearing();
 
@@ -167,7 +170,7 @@ module extruder_holes(second_extruder=false) {
 	difference() {
 		hull() for(x=[0,9]) {
 			translate([x,0,0]) cylinder(r=10/2, h=30);
-			translate([x,46,0]) cylinder(r=10/2, h=30);
+			translate([x,46+motor_elevation,0]) cylinder(r=10/2, h=30);
 		}
 	}
 	difference() {
@@ -257,22 +260,24 @@ module extruder_hotend(hotend=undef, second_extruder=false) {
 module extruder_full(hotend=undef) {
   extruder_body();
   translate([18.5,26,0]) %rotate([180,0,90]) motor();
-  extruder_mount();
-  extruder_hotend(hotend);
+  translate([0,motor_elevation,0]) extruder_mount();
+  translate([0,motor_elevation,0]) extruder_hotend(hotend);
 
   if(dual_extruder) translate([0,0,23*2]) mirror([0,0,1]) {
   	  extruder_body(second_extruder=true);
   	  translate([18.5,26,0]) %rotate([180,0,90]) motor();
-	  extruder_mount(second_extruder=true);
-	  extruder_hotend(hotend, second_extruder=true);
+	  translate([0,motor_elevation,0]) extruder_mount(second_extruder=true);
+	  translate([0,motor_elevation,0]) extruder_hotend(hotend, second_extruder=true);
   }
 }
 
 module extruder_full_holes(){
   extruder_holes();
   if(dual_extruder) translate([0,0,23*2]) mirror([0,0,1]) extruder_holes(second_extruder=true);
-  extruder_mount_holes(vertical_carriage, mounting_holes);
-  if(dual_extruder) translate([0,0,23*2]) mirror([0,0,1]) extruder_mount_holes(second_extruder=true);
+  translate([0,motor_elevation,0]) {
+	extruder_mount_holes(vertical_carriage, mounting_holes);
+  	if(dual_extruder) translate([0,0,23*2]) mirror([0,0,1]) extruder_mount_holes(second_extruder=true);
+  }
 }
 
 module tiltscrew() {
@@ -297,8 +302,8 @@ module extruder_idler_base(bearing_indent){
  }
  %translate([6,30,6]) bearing();
   translate([0,43,11]) rotate([0,90,0]) {
-	translate([0,0,6-5]) cube([8.4,5,4.5+5]);
-     translate([8.4/2,5,6-5]) cylinder(r=8.4/2, h=4.5+5);
+	translate([0,0,6-3]) cube([8.4,5,4.5+3]);
+     translate([8.4/2,5,6-3]) cylinder(r=8.4/2, h=4.5+3);
   }
 }
 
