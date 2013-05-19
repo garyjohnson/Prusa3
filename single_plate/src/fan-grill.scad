@@ -65,7 +65,7 @@ module body()
 		translate([size-cornerradius,cornerradius,0]) cylinder(r=cornerradius,h=thickness);
 		translate([size-cornerradius,size-cornerradius,0]) cylinder(r=cornerradius,h=thickness);
 
-		#translate([screwinset,screwinset,0]) cylinder(r=screwradius+2,h=thickness+1);
+		translate([screwinset,screwinset,0]) cylinder(r=screwradius+2,h=thickness+1);
 		translate([screwinset,size-screwinset,0]) cylinder(r=screwradius+2,h=thickness+1);
 		translate([size-screwinset,screwinset,0]) cylinder(r=screwradius+2,h=thickness+1);
 		translate([size-screwinset,size-screwinset,0]) cylinder(r=screwradius+2,h=thickness+1);
