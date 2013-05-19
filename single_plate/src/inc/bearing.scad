@@ -8,7 +8,7 @@
 bearing_diameter = 15;
 
 module horizontal_bearing_base(bearings=1){
- translate(v=[0,0,6]) cube(size = [24,8+bearings*25,12], center = true);	
+ translate(v=[0,0,8/2]) cube(size = [24,8+bearings*25,8], center = true);	
 }
 module horizontal_bearing_holes(bearings=1){
  cutter_lenght = 10+bearings*25;
@@ -39,6 +39,11 @@ module horizontal_bearing_holes(bearings=1){
  
 }
 
+*difference() {
+horizontal_bearing_base();
+horizontal_bearing_holes();
+}
+
 module horizontal_bearing_test(){
  difference(){
   horizontal_bearing_base(1);
@@ -55,18 +60,19 @@ module horizontal_bearing_test(){
 }
 
 
+vertical_bearing_height = 50;
 
 thinwall = 2;
 bearing_size = bearing_diameter + 2 * thinwall;
 
 module vertical_bearing_base(){
- translate(v=[-2-bearing_size/4,0,30]) cube(size = [4+bearing_size/2,bearing_size,60], center = true);
- cylinder(h = 60, r=bearing_size/2, $fn = 60);
+ translate(v=[-2-bearing_size/4,0,vertical_bearing_height/2]) cube(size = [4+bearing_size/2,bearing_size,vertical_bearing_height], center = true);
+ cylinder(h = vertical_bearing_height, r=bearing_size/2, $fn = 60);
 }
 
 module vertical_bearing_holes(){
-  translate(v=[0,0,-1]) cylinder(h = 62, r=bearing_diameter/2, $fn = 60);
-  rotate(a=[0,0,-60]) translate(v=[10,0,31]) cube(size = [10,1,62], center = true);
+  translate(v=[0,0,-1]) cylinder(h = vertical_bearing_height+10, r=bearing_diameter/2, $fn = 60);
+  rotate(a=[0,0,-60]) translate(v=[10,0,vertical_bearing_height/2+1]) cube(size = [10,1,vertical_bearing_height+2], center = true);
 }
 
 difference(){
