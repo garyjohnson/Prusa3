@@ -90,12 +90,12 @@ module jhead_mount(second_extruder=false) {
 	    translate([1.5+11+3.5,54,11+15]) rotate([-90,0,0]) cylinder(r=(groove_d+4)/2+0.5, h=top_h);
       }
       hull() {
-	    translate([1.5+11+3.5,54+top_h+groove_h,11+(groove_d/2)-1]) rotate([-90,0,0]) cylinder(r=(groove_d+4)/2+0.5, h=top_h);
+	    translate([1.5+11+3.5,54+top_h+groove_h,11+(groove_d/2)-6]) rotate([-90,0,0]) cylinder(r=(groove_d+4)/2+0.5, h=top_h);
 	    translate([1.5+11+3.5,54+top_h+groove_h,11+15]) rotate([-90,0,0]) cylinder(r=(groove_d+4)/2+0.5, h=top_h);
       }
-	 //translate([0,54,12]) cube([33, 2, 20]);
-      translate([40,61,18]) rotate([0,-90,0]) bolt(length=40, d=3.6);
-      translate([5.5,61,18]) rotate([0,-90,0]) cylinder(h=3.5, r=6/2);
+
+      translate([40,61,18.5]) rotate([0,-90,0]) bolt(length=40, d=3.6);
+      translate([5.5,61,18.5]) rotate([0,-90,0]) cylinder(h=3.5, r=6/2);
 
 	 translate([6,57,23-(36.5/2)]) rotate([0,-90,0]) union() {
 	   translate([0,0,-4]) cylinder(r=3.5/2,h=10);
@@ -143,7 +143,7 @@ module extruder_holes(second_extruder=false) {
 				// Upper motor mount hole
 				translate([5.5,-21+0.5,-10]) cylinder(r=2, h=34-20);
 				// Upper motor mount hole screw head
-				translate([5.5,-21+0.5,1.5]) nut(5.8,6);
+				translate([5.5,-21+0.5,1.5]) nut(6,6);
 			}
 			if(second_extruder) translate([5.5,-21+0.5,-0.3]) translate([-3,-3,1.5]) cube([6,6,0.3]);
 		}
@@ -154,7 +154,7 @@ module extruder_holes(second_extruder=false) {
 		}
 		
 		// Idler bearing cutout
-		translate([11+3+5,0,-4.5+10]) cylinder(r=12, h=24);
+		translate([11+3+5,0,4]) cylinder(r=12, h=24);
 	
 		// hole for the detachable tab
 		if(second_extruder == false) {
@@ -186,7 +186,7 @@ module extruder_holes(second_extruder=false) {
 	translate([19,48,6]) rotate([0,-90,45]) translate([0,0,2]) cylinder(r=6/2, h=4);
 
 	// Filament path
-	translate([25,65+4,11+1.5]) rotate([90,0,0]) cylinder(r=4/2, h=70);
+	translate([25,65+4,11]) rotate([90,0,0]) cylinder(r=4/2, h=70);
 
 	difference() {
 		union() {
@@ -198,7 +198,7 @@ module extruder_holes(second_extruder=false) {
 				cylinder(r=10/2, h=6);
 				translate([-5,-5,0]) cube([10,5,6]);
 			}
-			translate([12,3,4]) rotate([-45,0,-20]) translate([0,-2,-2]) cube([10,4,7]);
+			translate([12,3,3.5]) rotate([-35,0,-20]) translate([0,-2,-2]) cube([10,4,7]);
 		}
 	}
 	translate([19,6,5]) rotate([0,-90,45+25]) translate([0,0,2]) cylinder(r=6/2, h=2);
@@ -351,4 +351,7 @@ module extruder(hotend=undef){
   extruder_full(hotend=hotend);
   extruder_full_holes(hotend=hotend);
  }
+ translate([20.5,15,20]) cube([2, 30, 6]);
 }
+
+
