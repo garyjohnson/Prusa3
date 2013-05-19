@@ -36,8 +36,8 @@ module y_motor_holes(){
   translate(v = [-15.5,-15.5,-1]) cylinder(h = 10, r=1.7);
   translate(v = [-15.5,+15.5,-1]) cylinder(h = 10, r=1.7);
   // Screw holes
-  translate(v = [-15.5,-15.5,5]) cylinder(h = 7, r=3.5);
-  translate(v = [-15.5,+15.5,5]) cylinder(h = 7, r=3.5);
+  translate(v = [-15.5,-15.5,6.5]) cylinder(h = 7, r=3.5);
+  translate(v = [-15.5,+15.5,6.5]) cylinder(h = 7, r=3.5);
  }
  translate(v = [-2,10,-1]) cylinder(h = 12, r=5.4);	
  translate(v = [-2,30,-1])cylinder(h = 12, r=5.4);
