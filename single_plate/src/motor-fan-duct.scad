@@ -31,6 +31,8 @@ module motor_fan_duct(size=40) {
 	spinesize=2;
 	spineoffset=7;
 	spinerotation=0;
+
+	wall_thickness=0.44*3;
 	
 	
 	// Below are not parameters //
@@ -86,7 +88,7 @@ module motor_fan_duct(size=40) {
 			translate([-size/2,size/2,0]) cube([size,size,60]);
 		}
 		// perform projection sorcery in order to flatten the side of the shape
-		translate([0,size/2-0.44,0]) rotate([-90,0,0]) linear_extrude(height=0.44) projection(cut=false) rotate([90,0,0]) intersection() {
+		translate([0,size/2-wall_thickness,0]) rotate([-90,0,0]) linear_extrude(height=wall_thickness) projection(cut=false) rotate([90,0,0]) intersection() {
 			duct(height);
 			translate([-size/2,size/2,0]) cube([size,size,60]);
 		}
@@ -95,11 +97,11 @@ module motor_fan_duct(size=40) {
 	module duct(height=20) {
 		translate([0,0,10]) difference() {
 			cylinder(r=46/2,h=height-10);
-			cylinder(r=46/2-0.44,h=height-10);
+			cylinder(r=46/2-wall_thickness,h=height-10);
 		}
 		difference() {
 			cylinder(r1=39/2, r2=46/2,h=10);
-			cylinder(r1=39/2-0,44, r2=46/2-0.44,h=10);
+			cylinder(r1=39/2-wall_thickness, r2=46/2-wall_thickness,h=10);
 		}
 	}
 	
