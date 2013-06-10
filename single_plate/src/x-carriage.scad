@@ -10,7 +10,7 @@ use <inc/bearing.scad>
 
 module x_carriage_base() {
  // Small bearing holder
- translate([-33/2,0,0]) rotate([0,0,90]) horizontal_bearing_base(1);
+ translate([-33/2,0,0]) rotate([0,0,90]) horizontal_bearing_base(2);
  // Long bearing holder
  translate([-33/2,x_rod_distance,0]) rotate([0,0,90]) horizontal_bearing_base(1);
  // Base plate
@@ -33,7 +33,7 @@ module x_carriage_beltcut() {
 
 module x_carriage_holes() {
  // Small bearing holder holes cutter
- translate([-33/2,0,0]) rotate([0,0,90]) horizontal_bearing_holes(1);
+ translate([-33/2,0,0]) rotate([0,0,90]) horizontal_bearing_holes(2);
  // Long bearing holder holes cutter
  translate([-33/2,x_rod_distance,0]) rotate([0,0,90]) horizontal_bearing_holes(1);
   // Extruder mounting holes
@@ -47,9 +47,9 @@ module x_carriage_fancy() {
  // Top right corner
  translate([0,-5,0]) translate([0,45+11.5,-1]) rotate([0,0,45]) translate([0,-15,0]) cube([30,30,20]);
  // Bottom right corner
- translate([0,5,0]) translate([0,-11.5,-1]) rotate([0,0,-45]) translate([0,-15,0]) cube([30,30,20]);
+ #translate([0,5,0]) translate([12,-11.5,-1]) rotate([0,0,-45]) translate([0,-15,0]) cube([30,30,20]);
  // Bottom ĺeft corner
- translate([-33,5,0]) translate([0,-11.5,-1]) rotate([0,0,-135]) translate([0,-15,0]) cube([30,30,20]);
+ translate([-33,5,0]) translate([-12,-11.5,-1]) rotate([0,0,-135]) translate([0,-15,0]) cube([30,30,20]);
  // Top left corner
  translate([-33,-5,0]) translate([0,45+11.5,-1]) rotate([0,0,135]) translate([0,-15,0]) cube([30,30,20]);	
 }
