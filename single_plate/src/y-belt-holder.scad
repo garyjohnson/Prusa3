@@ -12,7 +12,7 @@ belt_elevation = 3;
 module belt_holder_base(){
  translate([-33-8.5,-belt_elevation,-1]) cube([33,15,16]); 
  translate([-33-8.5,11,-1]) cube([33,15,16]);
- translate([-50,22,-1]) cube([50,4,16]);	
+ translate([-50-7,22,-1]) cube([50+14,4,16]);
 }
 
 module belt_holder_beltcut(){
@@ -30,8 +30,14 @@ module belt_holder_beltcut(){
 }
 
 module belt_holder_holes(){
- translate([-4.5,0,7.5]) rotate([-90,0,0]) cylinder(h=30, r=1.7, $fn=10);
- translate([-45.5,0,7.5]) rotate([-90,0,0]) cylinder(h=30, r=1.7, $fn=10);
+ hull() {
+  translate([-4.5+7,0,7.5]) rotate([-90,0,0]) cylinder(h=30, r=1.7, $fn=10);
+  translate([-4.5,0,7.5]) rotate([-90,0,0]) cylinder(h=30, r=1.7, $fn=10);
+ }
+ hull() {
+  translate([-45.5,0,7.5]) rotate([-90,0,0]) cylinder(h=30, r=1.7, $fn=10);
+  translate([-45.5-7,0,7.5]) rotate([-90,0,0]) cylinder(h=30, r=1.7, $fn=10);
+ }
 }
 
 // Final part
