@@ -25,22 +25,22 @@ module y_motor_base(){
   translate(v = [-29+3+5,-21+30,0]) rotate([0,0,90]) quarter_round(r=5/2,h=10);
  }
  // Front holding part
- translate(v = [-2,10,0]) cylinder(h = 10, r=9);
+ translate(v = [-2,10-1,0]) cylinder(h = 10, r=9);
  translate(v = [-2,20,5])cube(size = [16,20,10], center=true);	
- translate(v = [-2,30,0])cylinder(h = 10, r=9);
+ translate(v = [-2,30+1,0])cylinder(h = 10, r=9);
 }
 
 module y_motor_holes(){
  translate(v = [29,-21+50,0]){
   // Screw head holes
-  translate(v = [-15.5,-15.5,-1]) cylinder(h = 10, r=1.7);
-  translate(v = [-15.5,+15.5,-1]) cylinder(h = 10, r=1.7);
+  translate(v = [-15.5,-15.5,-1]) cylinder(h = 10, r=4/2);
+  translate(v = [-15.5,+15.5,-1]) cylinder(h = 10, r=4/2);
   // Screw holes
   translate(v = [-15.5,-15.5,6.5]) cylinder(h = 7, r=3.5);
   translate(v = [-15.5,+15.5,6.5]) cylinder(h = 7, r=3.5);
  }
- translate(v = [-2,10,-1]) cylinder(h = 12, r=5.4);	
- translate(v = [-2,30,-1])cylinder(h = 12, r=5.4);
+ translate(v = [-2,10-1,-1]) cylinder(h = 12, r=5.4);
+ translate(v = [-2,30+1,-1])cylinder(h = 12, r=5.4);
 }
 
 // Final part
