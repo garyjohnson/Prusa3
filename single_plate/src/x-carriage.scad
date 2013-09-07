@@ -17,6 +17,8 @@ module x_carriage_base() {
  translate([-33,-11.5,0]) cube([33,68,8]);
  // Belt holder base
  translate([-33,20,0]) cube([33,12,17]);
+ // tabs for top screws
+ for(i=[12, -12]) translate([-16.5+i,24-36,0]) cylinder(r=3.5, h=8, $fn=30);
 }
 
 module x_carriage_beltcut() {
@@ -36,18 +38,16 @@ module x_carriage_holes() {
  translate([-33/2,0,0]) rotate([0,0,90]) horizontal_bearing_holes(2);
  // Long bearing holder holes cutter
  translate([-33/2,x_rod_distance,0]) rotate([0,0,90]) horizontal_bearing_holes(1);
-  // Extruder mounting holes
-  translate([-16.5+12,24,-1])cylinder(r=1.7, h=20, $fn=8);
-  translate([-16.5+12,24,10])cylinder(r=3.5, h=20, $fn=6); 
-  translate([-16.5-12,24,-1])cylinder(r=1.7, h=20, $fn=8);
-  translate([-16.5-12,24,10])cylinder(r=3.5, h=20, $fn=6); 	
+  // Extruder mounting holes (screw holes and screw head)
+  for(x=[12,-12],y=[0,36]) translate([-16.5+x,24-y,-1]) cylinder(r=1.7, h=20, $fn=20);
+  for(x=[12,-12],y=[0,36]) translate([-16.5+x,24-y,8]) cylinder(r=3.5, h=20, $fn=30);
 }
 
 module x_carriage_fancy() {
  // Top right corner
  translate([0,-5,0]) translate([0,45+11.5,-1]) rotate([0,0,45]) translate([0,-15,0]) cube([30,30,20]);
  // Bottom right corner
- #translate([0,5,0]) translate([12,-11.5,-1]) rotate([0,0,-45]) translate([0,-15,0]) cube([30,30,20]);
+ translate([0,5,0]) translate([12,-11.5,-1]) rotate([0,0,-45]) translate([0,-15,0]) cube([30,30,20]);
  // Bottom ĺeft corner
  translate([-33,5,0]) translate([-12,-11.5,-1]) rotate([0,0,-135]) translate([0,-15,0]) cube([30,30,20]);
  // Top left corner
