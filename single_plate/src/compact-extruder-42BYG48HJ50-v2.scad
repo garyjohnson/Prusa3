@@ -236,16 +236,16 @@ module extruder_holes(is_mirror) {
 	   translate([0,0,-12]) cylinder(r=3.5/2,h=16, $fn=30);
 	   translate([0,0,-12-16]) cylinder(r=6/2,h=16, $fn=30);
 	   hull() {
-			translate([0,0,0]) nut(5.5, 3);
-			translate([-10,0,0]) nut(5.5, 3);
+			translate([0,0,0]) nut(5.8, 3);
+			translate([-10,0,0]) nut(5.8, 3);
 	   }
 	}
 	translate([41-14,54,10-4.5]) rotate([-90,-90,180]) union() {
 	   translate([0,0,-12]) cylinder(r=3.5/2, h=16, $fn=30);
 	   translate([0,0,-12-16]) cylinder(r=6/2, h=16, $fn=30);
 	   hull() {
-			translate([1,0,0]) nut(5.5, 3);
-			translate([-10,0,0]) nut(5.5, 3);
+			translate([1,0,0]) nut(5.8, 3);
+			translate([-10,0,0]) nut(5.8, 3);
 	   }
 	}
 
@@ -270,15 +270,15 @@ module extruder_holes(is_mirror) {
 	translate([38, 61-9, 10]) rotate([-90,0,90]) union() {
          translate([0,0,-12]) cylinder(r=3.5/2,h=18, $fn=20);
          hull() {
-               translate([0,1,0]) rotate([0,0,90]) nut(5.5, 3);
-               translate([0,-10,0]) rotate([0,0,90]) nut(5.5, 3);
+               translate([0,1,0]) rotate([0,0,90]) nut(5.8, 3);
+               translate([0,-10,0]) rotate([0,0,90]) nut(5.8, 3);
      	}
      }
 	translate([38, 61-9-36, 10]) rotate([-90,0,90]) union() {
          translate([0,0,-12]) cylinder(r=3.5/2,h=18, $fn=20);
          hull() {
-               translate([0,1,0]) rotate([0,0,90]) nut(5.5, 3);
-               translate([0,-10,0]) rotate([0,0,90]) nut(5.5, 3);
+               translate([0,1,0]) rotate([0,0,90]) nut(5.8, 3);
+               translate([0,-10,0]) rotate([0,0,90]) nut(5.8, 3);
      	}
      }
 	
