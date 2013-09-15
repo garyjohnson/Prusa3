@@ -12,21 +12,30 @@ use <inc/42BYG48HJ50.scad>;
 with_hotend_mount = "jhead";
 
 
+// un-comment the desired view
+//display(); // display extruder as it will be after assembly
+print(); // full extruder ready to print
+//test(); // nut trap test
+
+
+///-
+
+
 module print() {
 	// extruder body.
 	for(i=[0,1]) mirror([i,0,0])
-		translate([-6,0,0]+i*[-68,-14,0]) extruder(hotend=with_hotend_mount, is_mirror=i);
+		translate([-0,-2,0]+i*[-74,-12,0]) extruder(hotend=with_hotend_mount, is_mirror=i);
 
 	// idler
-	translate([-7,-23,0]) for(i=[0,1]) mirror([i,0,0])
-		translate([0, 0, 11]+i*[33,20,0]) rotate([0,180,i?90:-90]) idler();
+	translate([60-7, 20-24, 11]) rotate([0,180,90]) idler();
+	translate([66,-15,11]) rotate([0,0,-90]) mirror([1,0,0])
+		/*translate([-16, 0, 11])*/ rotate([0,180,-90]) idler();
 
 	// printed rods for the 608zz bearings.
-	translate([34, -8, 0]) for(i=[0,1]) mirror([i,0,0])
+	translate([55, 15, 0]) for(i=[0,1]) mirror([i,0,0])
 		translate([4.5, 35, 0]+i*[0, 0, 0]) cylinder(r=8/2, h=14);
 
-	translate([-2, 50, 65.2]) rotate([-90,0,180]) union() {
-	//translate([3,10,0]) {
+	translate([5, 47, 65.2]) rotate([-90,0,180]) union() {
 		union() {
 			translate([0,2,0]) extruder_hotend(with_hotend_mount);
 			translate([0,2,52]) mirror([0,0,1]) extruder_hotend(with_hotend_mount);
@@ -49,8 +58,13 @@ module display() {
 	}
 }
 
-//display();
-print();
+// Use the test to verify nut traps!
+module test() {
+	intersection() {
+		extruder(hotend=with_hotend_mount, is_mirror=i);
+		#translate([18, 38, 0]) cube([26, 22, 20]);
+	}
+}
 
 ///-
 
@@ -126,10 +140,10 @@ module jhead_mount(second_extruder=false) {
 
 		// fan nut trap
 	 	translate([7.5,58,-3.5/2+52/2-36/2]) rotate([0,-90,0]) union() {
-		   	translate([0,0,-4]) cylinder(r=3.5/2,h=20,$fn=20);
+		   	translate([0,0,-4]) cylinder(r=3.8/2,h=20,$fn=20);
 		   	hull() {
-	     		translate([1,0,0]) nut(5.8, 3);
-	    			translate([-10,0,0]) nut(5.8, 3);
+	     		translate([0.5,0,0]) nut(5.3, 3);
+	    			translate([-5,0,0]) nut(5.6, 3);
 	   		}
 		}
 
@@ -150,9 +164,9 @@ elongation = 0;
 
 module extruder_body(is_mirror) {
 	// Main body
-	translate([9,0,0]) cube([21,66-9,52/2+4]);
-	translate([8-15,57-9,0]) cube([34+15,9,13]);
-	translate([10,57-9-36,0]) cube([36-4,8,18.5]);
+	translate([9,2,0]) cube([21,66-9-2,52/2+4]);
+	translate([8-15,57-10,0]) cube([44+5,10,13]);
+	translate([10,57-9-36-1,0]) cube([36-4,10,18.5]);
 	//nicer_filament_path();
 }
 
@@ -192,10 +206,11 @@ module extruder_holes(is_mirror) {
 	
 	difference() {
 		hull() {
-			translate([8, 52-9, 30]) rotate([0,90,0]) cylinder(r=10/2, h=25, $fn=30);
-			translate([8, 25, 30]) rotate([0,90,0]) cylinder(r=10/2, h=25, $fn=30);
-			translate([8, 52-9, 11]) rotate([0,90,0]) cylinder(r=10/2, h=25, $fn=30);
-			translate([8, 25, 11]) rotate([0,90,0]) cylinder(r=10/2, h=25, $fn=30);
+			translate([8, 52-9, 30]) rotate([0,90,0]) cylinder(r=10/2, h=22, $fn=30);
+			translate([8, 25, 30]) rotate([0,90,0]) cylinder(r=10/2, h=22, $fn=30);
+			translate([8, 52-9, 11]) rotate([0,90,0]) cylinder(r=10/2, h=22, $fn=30);
+			translate([8, 25, 11]) rotate([0,90,0]) cylinder(r=10/2, h=22, $fn=30);
+			translate([30,21,10]) cylinder(r=1,h=20, $fn=20);
 		}
 		// nicer filament path
 		nicer_filament_path();
@@ -221,12 +236,12 @@ module extruder_holes(is_mirror) {
 	}
 
 	// holes for motors
-    for(i=[0,36]) {
+	for(i=[0,36]) {
 	 translate([26,8+i,2]) rotate([0,0,180]) union() {
-	   translate([0,0,-7]) cylinder(r=3.5/2,h=10);
+	   translate([0,0,-7]) cylinder(r=3.5/2,h=10, $fn=20);
 	   hull() {
-	     translate([1,0,0]) nut(5.8, 3);
-	     translate([-7,0,0]) nut(5.8, 3);
+	     translate([0.5,0,0]) nut(5.3, 3);
+	     translate([-7,0,0]) nut(5.6, 3);
 	   }
 	 }
     }
@@ -236,17 +251,30 @@ module extruder_holes(is_mirror) {
 	   translate([0,0,-12]) cylinder(r=3.5/2,h=16, $fn=30);
 	   translate([0,0,-12-16]) cylinder(r=6/2,h=16, $fn=30);
 	   hull() {
-			translate([0,0,0]) nut(5.8, 3);
-			translate([-10,0,0]) nut(5.8, 3);
+			translate([0.5,0,0]) nut(5.3, 3);
+			translate([-6,0,0]) nut(5.6, 3);
 	   }
+	   hull() {
+		translate([-13,-4,-1]) cube([5,8,5]);
+		translate([-11,-3,1.5]) rotate([0,45,0]) cube([4,5.9,4]);
+	   }
+	   translate([-8,-4,0]) rotate([0,0,45]) cube([5.9,5.9,3]);
+	   
 	}
 	translate([41-14,54,10-4.5]) rotate([-90,-90,180]) union() {
 	   translate([0,0,-12]) cylinder(r=3.5/2, h=16, $fn=30);
 	   translate([0,0,-12-16]) cylinder(r=6/2, h=16, $fn=30);
 	   hull() {
-			translate([1,0,0]) nut(5.8, 3);
-			translate([-10,0,0]) nut(5.8, 3);
+			translate([0.5,0,0]) nut(5.3, 3);
+			translate([-6,0,0]) nut(5.6, 3);
 	   }
+	   
+	   hull() {
+		translate([-11,-4,-1]) cube([5,8,5]);
+		translate([-9,-3,1.5]) rotate([0,45,0]) cube([4,5.9,4]);
+	   }
+	   translate([-6,-4,0]) rotate([0,0,45]) cube([5.9,5.9,3]);
+	   
 	}
 
 	// rounded corners
@@ -270,16 +298,30 @@ module extruder_holes(is_mirror) {
 	translate([38, 61-9, 10]) rotate([-90,0,90]) union() {
          translate([0,0,-12]) cylinder(r=3.5/2,h=18, $fn=20);
          hull() {
-               translate([0,1,0]) rotate([0,0,90]) nut(5.8, 3);
-               translate([0,-10,0]) rotate([0,0,90]) nut(5.8, 3);
+               translate([0,0.5,0]) rotate([0,0,90]) nut(5.3, 3);
+               translate([0,-5,0]) rotate([0,0,90]) nut(5.6, 3);
      	}
+		translate([0,2.5,0]) rotate([0,0,90]) {
+	   hull() {
+		translate([-11,-4,-1]) cube([5,8,5]);
+		translate([-9,-3,1.5]) rotate([0,45,0]) cube([4,5.9,4]);
+	   }
+	   translate([-6,-4,0]) rotate([0,0,45]) cube([5.9,5.9,3]);
+		}
      }
 	translate([38, 61-9-36, 10]) rotate([-90,0,90]) union() {
          translate([0,0,-12]) cylinder(r=3.5/2,h=18, $fn=20);
          hull() {
-               translate([0,1,0]) rotate([0,0,90]) nut(5.8, 3);
-               translate([0,-10,0]) rotate([0,0,90]) nut(5.8, 3);
+               translate([0,0.5,0]) rotate([0,0,90]) nut(5.3, 3);
+               translate([0,-5,0]) rotate([0,0,90]) nut(5.6, 3);
      	}
+		translate([0,0.5,0]) rotate([0,0,90]) union() {
+	   hull() {
+		translate([-11,-4,-1]) cube([5,8.4,5]);
+		hull() for(z=[0,3]) translate([-9-z,-3,1.5]) rotate([0,45,0]) cube([4,5.9,4]);
+	   }
+	   hull() for(z=[0,3]) translate([-6-z,-4,0]) rotate([0,0,45]) cube([5.9,5.9,3]);
+		}
      }
 	
 	// angle cut near the x-carriage screw 
@@ -320,8 +362,14 @@ module extruder_idler_base(bearing_indent){
 	translate([0, 32+1, 6]) rotate([-50, 0, 0]) translate([0,-1.5,0]) cube([19.5, 21, 6]);
 	intersection() {
 		translate([0,8,-8+2]) cube([19.5, 36, 13+4]);
-		translate([0,25+5,6.1-bearing_indent]) rotate([0,90,0]) cylinder(r=16/2, h=19.5);
+		hull() for (z=[6.1-bearing_indent, 6.1]) translate([0,25+5,z]) rotate([0,90,0]) cylinder(r=16/2, h=19.5);
  	}
+	hull() for(y=[10, 1]) translate([14,y,3-0.5+2.5]) cylinder(r=3,h=6, $fn=30);
+
+	translate([9,8,3-0.5+2.5]) difference() {
+		cube([2,2,6]);
+		cylinder(r=2,h=6, $fn=30);
+	}
 	// bearing
 	%translate([6,30,6]) bearing();
 }
@@ -330,7 +378,7 @@ module extruder_idler_holes(bearing_indent){
 	translate([10,25+5,0]){
 		// Main cutout
 		difference() {
-			translate([0,0,6]) cube([10,23,25-6], center=true);
+			translate([0,0,6]) cube([10,23,25], center=true);
 			translate([3.7,0,4.1+2-bearing_indent]) rotate([0,90,0]) cylinder(r1=6, r2=8, h=1.3);
 			translate([-5,0,4.1+2-bearing_indent]) rotate([0,90,0]) cylinder(r1=8, r2=6, h=1.3);
 		}
@@ -342,15 +390,20 @@ module extruder_idler_holes(bearing_indent){
 		}
 	}
 	hull() {
-		translate([5.5,13,-1]) cylinder(r=5.5/2, h=15);
-		translate([5.5,0,-1]) cylinder(r=5.5/2, h=15);
+		translate([5.5,13,-1]) cylinder(r=5.5/2, h=15, $fn=30);
+		translate([5.5,0,-1]) cylinder(r=5.5/2, h=15, $fn=30);
 	}
-	#translate([-4+9, 46,-5]) rotate([0,90,0]) bolt(25-9, 3.5, $fn=25);
+	translate([-4+9, 46,-5]) rotate([0,90,0]) bolt(25-9, 3.5, $fn=25);
 	translate([-2,40,-6]) rotate([-50,0,0]) cube([10,10,10]);
+
+	hull() {
+		translate([20,16,3-0.5+2.5]) cylinder(r=3,h=6, $fn=30);
+		translate([17,0,3-0.5+2.5]) cube([10,10,10]);
+	}
 }
 
 // Idler final part
-module idler(bearing_indent=-1) {
+module idler(bearing_indent=1) {
 	difference() {
 		extruder_idler_base(bearing_indent);
 		extruder_idler_holes(bearing_indent);
