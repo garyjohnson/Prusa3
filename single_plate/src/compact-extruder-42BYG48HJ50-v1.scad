@@ -1,9 +1,10 @@
 // PRUSA iteration3
 // Compact extruder
 // GNU GPL v3
-// Josef Průša <iam@josefprusa.cz> and contributors
+// Author: EiNSTeiN_ <einstein@g3nius.org> (based on works by Josef Prusa <iam@josefprusa.cz>)
 // http://www.reprap.org/wiki/Prusa_Mendel
 // http://prusamendel.org
+
 
 use <inc/42BYG48HJ50.scad>;
 
