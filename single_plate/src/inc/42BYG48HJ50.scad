@@ -1,3 +1,5 @@
+// Author: EiNSTeiN_ <einstein@g3nius.org>
+
 module motor_42BYG48HJ50(mini_hyena=false) {
 
 	cylinder(h=38,r=42/2);
