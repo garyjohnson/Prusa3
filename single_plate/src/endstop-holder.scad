@@ -25,10 +25,10 @@ module y_clip() {
   }
 }
 
-y_clip();
+*y_clip();
 
-module xz_clip() {
-  thickness = 8;
+module z_clip() {
+  thickness = 30;
   rod = 8.3;
   holes_distance = 19; // between the two screw holes on the switch.
   slit_height = 4;
@@ -39,15 +39,15 @@ module xz_clip() {
       cylinder(r=rod/2 + 2, h=thickness);
     }
     cylinder(r=rod/2, h=thickness);
-    translate([0,0,thickness/2-slit_height/2]) difference() {
+    #for(z=[thickness/2-slit_height/2, thickness-6]) translate([0,0,z]) difference() {
       cylinder(r=rod/2 + 4, h=slit_height);
       cylinder(r=rod/2 + 2, h=slit_height);
     }
     translate([0, -(rod - 1) / 2, 0]) cube([10, rod - 1, thickness]);
     translate([(rod / 2) - 1, -(rod + 4) / 2, 0]) cube([10, rod + 4, thickness]);
 
-    for(i=[-1,1]) translate([-20,i*(holes_distance/2),thickness/2]) rotate([0,90,0]) cylinder(r = 4/2, h = 20);
+    for(i=[-1,1]) translate([-20,i*(holes_distance/2),4]) rotate([0,90,0]) cylinder(r = 4/2, h = 20);
   }
 }
 
-*xz_clip();
+z_clip();
