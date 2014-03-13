@@ -8,8 +8,8 @@
 module z_bottom_base(){
  translate([0,0,0]) cube([8,40,16+25]); // plate touching the base
  translate([0,-5,0]) cube([30,5.01,22]); // plate touching the base
- translate([0,-5,0]) cube([50,15,5]); // plate touching the base
- translate([0,-5,0]) cube([18,50,5]);
+ translate([0,-5,0]) cube([50,15,7]); // plate touching the base
+ translate([0,-5,0]) cube([18,50,7]);
 }
 
 module z_bottom_fancy(){
