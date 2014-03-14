@@ -166,6 +166,8 @@ module jhead_mount(second_extruder=false) {
 	   		translate([0,0,-17-25+10]) cylinder(r=7/2,h=25, $fn=20);
 		}
 	}
+
+	#translate([-5,60,24]) cube([50,20,6]);
    }
 }
 
