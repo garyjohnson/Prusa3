@@ -43,19 +43,18 @@ translate([-98,-15,0]) rotate([0,0,-90]) spool_holder();
 
 translate([53,53,0]) fan_grill(size=45);
 
-translate([45,-50,0]) {
-	translate([1,-3,0]) belt_guide();
+translate([45,-60,0]) {
+	translate([1,0,0]) belt_guide();
 	translate([32,0,0]) belt_guide();
 }
 
-//translate([96,-8,0]) rotate([0,0,180]) switch_holder();
-translate([60,-34,0]) rotate([0,0,0]) y_clip();
-translate([73,18,0]) xz_clip();
-translate([85,25,0]) rotate([0,0,-90]) xz_clip();
+translate([90,-38,0]) rotate([0,0,0]) y_clip();
+translate([73,18,0]) x_clip();
+translate([85,25,0]) rotate([0,0,-90]) z_clip();
 
 translate([-95,-76,0]) import("inc/Vision_12_Volt_Power_Supply_Cover_-_Final.stl");
 
-translate([18,-80,0]) y_motor_backing();
+translate([58,-40,0]) rotate([0,0,95]) y_motor_backing();
 }
 
 platter();
