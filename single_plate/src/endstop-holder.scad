@@ -32,7 +32,7 @@ module y_clip() {
   }
 }
 
-y_clip();
+*y_clip();
 
 module x_clip() {
   thickness = 20;
@@ -85,3 +85,14 @@ module z_clip() {
 }
 
 *z_clip();
+
+
+module z_cap() {
+	difference() {
+		cylinder(r=6/2,h=7, $fn=30);
+		translate([0,0,2]) cylinder(r=3/2, h=7, $fn=30);
+	}
+	cylinder(r=12/2,h=2, $fn=30);
+}
+
+z_cap();
