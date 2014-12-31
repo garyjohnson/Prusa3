@@ -73,22 +73,18 @@ module x_end_motor_holes(){
  }
 }
 
-// Final part
-module x_end_motor(){
- difference(){
-  x_end_motor_base();
-  x_end_motor_holes();
+module x_endstop_trap_base(){
+ hull() {
+  cylinder(r=10/2, h=4, $fn=20);
+  translate([-10/2, -10/2, -8]) cube([10, 1, 12]);
  }
+}
 
- // side nut trap for Z endstop
+module x_endstop_nut_trap(){
  difference() {
    translate([0,13,46]) {
      difference() {
-       hull() {
-         cylinder(r=10/2, h=4, $fn=20);
-         translate([-10/2, -10/2, -8]) cube([10, 1, 12]);
-       }
-
+       x_endstop_trap_base();
        translate([0,0,-10]) cylinder(r=3.5/2, h=20, $fn=6);
        translate([0,-1,0]) {
          cylinder(r=6/2, h=3, $fn=6);
@@ -97,9 +93,28 @@ module x_end_motor(){
        translate([-12/2, 4, -10/2]) cube([12, 6, 10]);
      }
    }
-
-   
  }
+}
+
+module x_endstop_magnet_trap(){
+ difference() {
+   translate([0,13,46]) {
+     difference() {
+       x_endstop_trap_base();
+       translate([0,0,0]) cylinder(r=5/2, h=5, $fn=20);
+     }
+   }
+ }
+}
+
+// Final part
+module x_end_motor(){
+ difference(){
+  x_end_motor_base();
+  x_end_motor_holes();
+ }
+ if(z_endstop_type == 1) x_endstop_nut_trap();
+ if(z_endstop_type == 2) x_endstop_magnet_trap();
 }
 
 x_end_motor();

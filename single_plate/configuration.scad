@@ -38,3 +38,8 @@ hotend_mount = 1;
 
 hotend_groovemount_depth = 5;
 hotend_groovemount_diameter = 16;
+
+// Select your z endstop type ******************************************************
+
+// 0 = none; 1 = mechanical switch; 2 = hall effect switch
+z_endstop_type = 1;
